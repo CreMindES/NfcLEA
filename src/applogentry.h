@@ -4,14 +4,24 @@
 #include <QObject>
 #include <QDateTime>
 
-class appLogEntry : public QObject
+#include "nfclogentry.h"
+#include "rulelogentry.h"
+
+class AppLogEntry : public QObject
 {
     Q_OBJECT
 public:
-    explicit appLogEntry(QObject *parent = 0);
+    explicit AppLogEntry(QObject *parent = 0);
 
-    QDateTime Time;
+    QDateTime dateTime;
     int logEntryType;
+
+    NfcLogEntry *nfcLogEntry;
+    RuleLogEntry *ruleLogEntry;
+
+//    void createAppLogEntry(nfcLogEntry newNfcLogEntry);
+    void addNfcLogEntry(NfcLogEntry newNfcLogEntry, QString uid, QNdefMessage message, QString alias = 0);
+    void addRuleLogEntry(RuleLogEntry newRuleLogEntry);
 
     enum LOG_ENTRY_TYPE {
         Nfc,

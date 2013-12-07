@@ -8,6 +8,8 @@ class AppLogger : public QObject
     Q_OBJECT
 public:
     explicit AppLogger(QObject *parent = 0);
+
+    //void addAppLogEntry();
     
 signals:
     
