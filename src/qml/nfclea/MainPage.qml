@@ -106,6 +106,7 @@ Page {
         ToolIcon {
             platformIconId: "toolbar-column"
             anchors.left: parent.left
+            onClicked: listPage.openFile("TestPage.qml")
         }
     }
 
