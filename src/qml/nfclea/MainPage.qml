@@ -1,9 +1,10 @@
 import QtQuick 1.1
 import com.nokia.meego 1.1
-import Nfc 1.0
+//import Nfc 1.0
 
 Page {
     id: listPage
+    tools: commonTools
     anchors.margins: UiConstants.DefaultMargin
     //orientationLock: lockInPortrait
 
@@ -16,15 +17,17 @@ Page {
             console.log("Error loading component:", component.errorString());
     }
 
-    tools: commonTools
+    Connections {
+        target: nfcManager
 
-    NdefManager {
-        id: ndefManager
         onTagDetected: {
+            console.log("QML: target detected")
             applogo.animationRunning = true
-            console.log("UID: ", uid)
             notificationBar.message = "UID: " + uid
             notificationBar.opacity = 0.8
+        }
+        onNfcReadTagUri: {
+            console.log("uri: " + nfcTagUri)
         }
         onTagLost: {
             notificationBar.opacity = 0
@@ -32,14 +35,14 @@ Page {
             notificationBar.opacity = 0.8
             notificationBarTimer.start();
         }
-        onNfcReadTagUri: {
-            console.log("uri: " + nfcTagUri)
-        }
+
+        ignoreUnknownSignals: true
+    }
 
         //onTargetDetected: conlose.log("I'm happy: ", target.uid)
         //onIsNfcAvailableChanged: console.log(isNfcAvailable);
         //onTagPresent: console.log("I'm happy")
-    }
+
 
     NotificationBar {
         id: notificationBar
