@@ -28,16 +28,17 @@ private:
 
 signals:
     void tagDetected(QString uid);
+    void nfcTagUriRecordRead(QString uid, QUrl uri);
     void tagLost();
     void nfcReadTagUri(const QUrl& nfcTagUri);
     
 public slots:
 
 private slots:
-    void targetDetected2(QNearFieldTarget *target);
-    void targetDetected(const QNdefMessage &message, QNearFieldTarget *target);
-    void targetLost(QNearFieldTarget *target);
-    void readRecord(QNdefMessage message);
+    void onTargetDetected2(QNearFieldTarget *target);
+    void onTargetDetected(const QNdefMessage &message, QNearFieldTarget *target);
+    void onTargetLost(QNearFieldTarget *target);
+    void onRecordRead(QNdefMessage message);
 };
 
 #endif // NDEFMANAGER_H

@@ -1,12 +1,45 @@
 import QtQuick 1.1
 import com.nokia.meego 1.0
-//import SystemPalette 1.0
 
 Page {
     id: logPage
     tools: historyTools
     anchors.margins: UiConstants.DefaultMargin
 
+    Connections{
+        target: appLogModel2
+        onLogCountChanged: {
+            console.log("New log added.")
+        }
+    }
+
+    ListView {
+        id: listview
+        anchors.fill: parent
+
+        model: appLogModel
+        delegate:
+            Text {
+                text: uid
+            }
+            Text {
+                id: text2
+                text: logCount
+                anchors.bottom: parent.bottom
+                anchors.bottomMargin: 5
+            }
+
+        /*
+            Text: {
+                text: test
+            }*/
+
+        spacing: 10
+    }
+
+
+//  LogPage
+/*
     Text {
         id: pageLabel
         text: "History"
@@ -190,6 +223,7 @@ Page {
         }
 
     }
+*/
 
     ToolBarLayout {
         id: historyTools

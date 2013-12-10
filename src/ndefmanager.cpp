@@ -18,8 +18,8 @@ NdefManager::NdefManager(QObject *parent) :
     //filter.appendRecord(QNdefRecord::NfcRtd, "U");
     //nfcManager->registerNdefMessageHandler(QNdefRecord::NfcRtd, "U", this, SLOT(targetDetected2(QNdefMessage, QNearFieldTarget)));
 
-    connect(nfcManager, SIGNAL(targetDetected(QNearFieldTarget*)), this, SLOT(targetDetected2(QNearFieldTarget*)));
-    connect(nfcManager, SIGNAL(targetLost(QNearFieldTarget*)), this, SLOT(targetLost(QNearFieldTarget*)));
+    connect(nfcManager, SIGNAL(targetDetected(QNearFieldTarget*)), this, SLOT(onTargetDetected2(QNearFieldTarget*)));
+    connect(nfcManager, SIGNAL(targetLost(QNearFieldTarget*)), this, SLOT(onTargetLost(QNearFieldTarget*)));
 
     isNfcAvailabe = true; // for qml
     isNfcAvailabe = nfcManager->isAvailable();
@@ -32,17 +32,18 @@ NdefManager::NdefManager(QObject *parent) :
     }
 }
 
-void NdefManager::targetDetected2(QNearFieldTarget *target)
+void NdefManager::onTargetDetected2(QNearFieldTarget *target)
 {
     qDebug() << "Target detected.";
     currentUID = QString(target->uid().toHex());
     emit tagDetected(currentUID);
 
-    connect(target, SIGNAL(ndefMessageRead(QNdefMessage)), this, SLOT(readRecord(QNdefMessage)));
+    connect(target, SIGNAL(ndefMessageRead(QNdefMessage)), this, SLOT(onRecordRead(QNdefMessage)));
     target->readNdefMessages();
+
 }
 
-void NdefManager::readRecord(QNdefMessage message)
+void NdefManager::onRecordRead(QNdefMessage message)
 {
 //    QByteArray result;
 
@@ -55,13 +56,14 @@ void NdefManager::readRecord(QNdefMessage message)
             QNdefNfcUriRecord uriRecord(record);
             // Emit a signal with the URI
             emit nfcReadTagUri(uriRecord.uri());
+            emit nfcTagUriRecordRead(currentUID, uriRecord.uri());
         }
     }
 
     //qDebug() << "readRecord:\n" << record.type();
 }
 
-void NdefManager::targetDetected(const QNdefMessage &message, QNearFieldTarget *target)
+void NdefManager::onTargetDetected(const QNdefMessage &message, QNearFieldTarget *target)
 {
     qDebug() << "Uri target detected.";
     currentUID = QString(target->uid().toHex());
@@ -83,7 +85,7 @@ void NdefManager::targetDetected(const QNdefMessage &message, QNearFieldTarget *
 
 }
 
-void NdefManager::targetLost(QNearFieldTarget *target)
+void NdefManager::onTargetLost(QNearFieldTarget *target)
 {
     target->deleteLater();
     qDebug() << "Target lost.";

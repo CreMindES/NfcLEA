@@ -10,8 +10,13 @@
 class AppLogEntry : public QObject
 {
     Q_OBJECT
+    Q_PROPERTY(QString uid READ nfc_uid NOTIFY nfc_uidChanged)
+    Q_PROPERTY(QString test READ test_text)
+    // Q_PROPERTY( NfcLogEntry nfcLogEntry READ getNcfLogEntry )
+
 public:
     explicit AppLogEntry(QObject *parent = 0);
+    AppLogEntry(NfcLogEntry *newNfcLogEntry);
 
     QDateTime dateTime;
     int logEntryType;
@@ -19,16 +24,29 @@ public:
     NfcLogEntry *nfcLogEntry;
     RuleLogEntry *ruleLogEntry;
 
+    QString test_text() { return "jupi"; }
+
+    QString nfc_uid() { return nfcLogEntry->getUid(); }
+    QString nfc_alias() { return nfcLogEntry->getAlias(); }
+
 //    void createAppLogEntry(nfcLogEntry newNfcLogEntry);
-    void addNfcLogEntry(NfcLogEntry newNfcLogEntry, QString uid, QNdefMessage message, QString alias = 0);
-    void addRuleLogEntry(RuleLogEntry newRuleLogEntry);
+    void createNfcLogEntry(QString uid, QUrl url);
+    void createRuleLogEntry(RuleLogEntry *newRuleLogEntry);
+    NfcLogEntry* getNfcLogEntry() { return nfcLogEntry; }
 
     enum LOG_ENTRY_TYPE {
-        Nfc,
-        Rule
+        nfcTypeLogEntry,
+        ruleTypeLogEntry
     };
+
+private:
+    QString text;
+    QString uid;
+    QUrl url;
     
 signals:
+    void nfc_uidChanged();
+    void logCountChanged();
     
 public slots:
     
