@@ -5,15 +5,19 @@ Page {
     id: aboutPage
     tools: aboutTools
     anchors.margins: UiConstants.DefaultMargin
+    orientationLock: PageOrientation.LockPortrait
+
+    /*
+    ScrollDecorator {
+        flickableItem: flickable
+    }
+    */
 
     Flickable {
         id: flickable
         anchors.fill: parent
-//        width: parent.width
-//        height: 200
-
-        //contentHeight: 200
-        //contentWidth: parent.width
+        contentHeight: parent.height
+        contentWidth: parent.width
 
         Item {
             id: appNameAndLogoContainer

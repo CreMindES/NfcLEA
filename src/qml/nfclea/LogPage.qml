@@ -5,6 +5,7 @@ Page {
     id: logPage
     tools: historyTools
     anchors.margins: UiConstants.DefaultMargin
+    orientationLock: PageOrientation.LockPortrait
 
     SystemPalette { id: myPalette; colorGroup: SystemPalette.Active }
 
@@ -137,9 +138,13 @@ Page {
     ToolBarLayout {
         id: historyTools
 
-        ToolIcon { iconId: "toolbar-back"; onClicked: { pageStack.pop(); } }
+        ToolIcon {
+            iconId: "toolbar-back"
+            onClicked: pageStack.pop()
+        }
         ToolIcon {
             iconId: "toolbar-view-menu" ;
+            enabled: (myMenu.status === DialogStatus.Closed) ? true : false
             onClicked: (myMenu.status === DialogStatus.Closed) ? logMenu.open() : logMenu.close()
         }
     }

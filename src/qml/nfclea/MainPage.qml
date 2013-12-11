@@ -1,12 +1,11 @@
 import QtQuick 1.1
 import com.nokia.meego 1.1
-//import Nfc 1.0
 
 Page {
     id: listPage
     tools: commonTools
     anchors.margins: UiConstants.DefaultMargin
-    //orientationLock: lockInPortrait
+    orientationLock: PageOrientation.LockPortrait
 
     function openFile(file) {
         var component = Qt.createComponent(file)
@@ -104,11 +103,13 @@ Page {
         }
         ToolIcon {
             platformIconId: "toolbar-history"
+            enabled: (myMenu.status === DialogStatus.Closed) ? true : false
             onClicked: listPage.openFile("LogPage.qml")
         }
         ToolIcon {
             platformIconId: "toolbar-column"
             anchors.left: parent.left
+            enabled: (myMenu.status === DialogStatus.Closed) ? true : false
             onClicked: listPage.openFile("TestPage.qml")
         }
     }
