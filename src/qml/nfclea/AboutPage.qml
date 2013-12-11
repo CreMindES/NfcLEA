@@ -53,7 +53,7 @@ Page {
                 height: 30
                 width: appName.width
 
-                text: "Version 0.1.0"
+                text: "Version 0.2.0"
 
                 color: "#000"
                 font.pixelSize: 20
@@ -102,7 +102,7 @@ Page {
                 width: parent.width
                 height: 20
 
-                text: "This application is licensed under \nGPL v3+. " +
+                text: "This application is licensed under \nGPLv3+. " +
                       "If you need another type of license, please contact us."
 
                 wrapMode: Text.WordWrap
