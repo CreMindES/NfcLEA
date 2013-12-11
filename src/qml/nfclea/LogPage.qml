@@ -13,87 +13,14 @@ Page {
 
         Text {
             id: pageLabel
-            text: "History"
+            text: qsTr("Notifications")
 
             color: "#f8249ca4"
 
             font.pointSize: 35
 
-            height: 80
+            height: 100
             width: parent.width - 10
-            //anchors.top: logListView.top
-            //anchors.topMargin: 5
-            //anchors.left: logListView.left
-            //anchors.leftMargin: 5
-        }
-    }
-
-    ListModel {
-        id: logModel
-        ListElement {
-            eventType: "nfc"
-            uid: "45646546546546"
-            timeElapsed: "5h"
-
-        }
-        ListElement {
-            eventType: "nfc"
-            uid: "456hhdz777222d"
-            timeElapsed: "6h"
-        }
-        ListElement {
-            eventType: "ruleActivation"
-            uid: "Light1";
-            timeElapsed: "8h"
-        }
-        ListElement {
-            eventType: "ruleDeactivation"
-            uid: "Light3"
-            timeElapsed: "8h"
-        }
-        ListElement {
-            eventType: "nfc"
-            uid: "45646546546546"
-            timeElapsed: "5h"
-
-        }
-        ListElement {
-            eventType: "nfc"
-            uid: "456hhdz777222d"
-            timeElapsed: "6h"
-        }
-        ListElement {
-            eventType: "nfc"
-            uid: "45646546546546"
-            timeElapsed: "5h"
-
-        }
-        ListElement {
-            eventType: "nfc"
-            uid: "456hhdz777222d"
-            timeElapsed: "6h"
-        }
-        ListElement {
-            eventType: "nfc"
-            uid: "45646546546546"
-            timeElapsed: "5h"
-
-        }
-        ListElement {
-            eventType: "nfc"
-            uid: "456hhdz777222d"
-            timeElapsed: "6h"
-        }
-        ListElement {
-            eventType: "nfc"
-            uid: "45646546546546"
-            timeElapsed: "5h"
-
-        }
-        ListElement {
-            eventType: "nfc"
-            uid: "456hhdz777222d"
-            timeElapsed: "6h"
         }
     }
 
@@ -119,8 +46,8 @@ Page {
                 width: parent.width / 2
                 height: parent.height
 
-                color: if(eventType === "nfc") return "light blue"
-                       else if(eventType === "ruleActivation") return "light green"
+                color: if(logEntryType === 0) return "light blue"
+                       else if(logEntryType === 1) return "light green"
                        else return "red"
                 radius: parent.radius
 
@@ -141,8 +68,8 @@ Page {
                 Text {
                     id: nfcLogEntryName
 
-                    text: if(eventType === "nfc") return "NFC tag contacted\nUID: " + uid
-                          else return "Rule: " + uid
+                    text: if(logEntryType === 0) return "NFC tag contacted\nUID: " + nfcUid
+                          else return "Rule: " + nfcUid
 
                     font.pointSize: 18
 
@@ -157,7 +84,7 @@ Page {
                 Text {
                     id: logTimeElapsed
 
-                    text: timeElapsed + " ago"
+                    text: timeElapsed
 
                     color: "#696363"
                     font.pointSize: 10
@@ -190,7 +117,7 @@ Page {
 
     ListView {
         id: logListView
-        model: logModel
+        model: appLogModel
         delegate: logDelegate
         //highlight: Rectangle { color: "lightsteelblue"; radius: 5 }
         focus: true
@@ -221,7 +148,10 @@ Page {
         id: logMenu
         visualParent: logPage
         MenuLayout {
-            MenuItem { text: qsTr("Clear history") }
+            MenuItem {
+                text: qsTr("Clear history")
+                onClicked: appLogModel.clearHistory()
+            }
         }
     }
 }

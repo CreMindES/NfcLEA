@@ -4,7 +4,8 @@
 #include <QObject>
 #include <QUrl>
 
-#include "applogger.h"
+//#include "applogger.h"
+#include "applogmodel.h"
 #include "ndefmanager.h"
 
 class App : public QObject
@@ -13,7 +14,8 @@ class App : public QObject
 public:
     explicit App(QObject *parent = 0);
 
-    AppLogger appLogger;
+    //AppLogger appLogger;
+    AppLogModel appLogModel;
     NdefManager *ndefManager;
     
 signals:

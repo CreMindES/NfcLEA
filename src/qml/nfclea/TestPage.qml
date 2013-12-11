@@ -6,12 +6,12 @@ Page {
     tools: historyTools
     anchors.margins: UiConstants.DefaultMargin
 
-    Connections{
+    /*Connections{
         target: appLogModel2
         onLogCountChanged: {
             console.log("New log added.")
         }
-    }
+    }*/
 
     ListView {
         id: listview
@@ -20,19 +20,16 @@ Page {
         model: appLogModel
         delegate:
             Text {
-                text: uid
+                text: nfcUid
             }
+        /*
             Text {
                 id: text2
                 text: logCount
                 anchors.bottom: parent.bottom
                 anchors.bottomMargin: 5
             }
-
-        /*
-            Text: {
-                text: test
-            }*/
+*/
 
         spacing: 10
     }

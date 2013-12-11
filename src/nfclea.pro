@@ -32,11 +32,11 @@ CONFIG += qdeclarative-boostable
 # The .cpp file which was generated for your project. Feel free to hack it.
 SOURCES += main.cpp \
     ndefmanager.cpp \
-    applogger.cpp \
     applogentry.cpp \
     nfclogentry.cpp \
     rulelogentry.cpp \
-    app.cpp
+    app.cpp \
+    applogmodel.cpp
 
 # Please do not modify the following two lines. Required for deployment.
 include(qmlapplicationviewer/qmlapplicationviewer.pri)
@@ -67,8 +67,8 @@ RESOURCES += \
 
 HEADERS += \
     ndefmanager.h \
-    applogger.h \
     applogentry.h \
     nfclogentry.h \
     rulelogentry.h \
-    app.h
+    app.h \
+    applogmodel.h
