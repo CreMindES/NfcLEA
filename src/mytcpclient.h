@@ -15,15 +15,19 @@ public:
     ~MyTcpClient();
 
     bool connectToServer(QString addess, quint16 port);
-    bool reConnectToServer();
+    Q_INVOKABLE bool reConnectToServer();
     void sendNfcUid(QString uid);
+
+    Q_INVOKABLE bool isClientConnected();
+    Q_INVOKABLE QString getHostAddress();
     
 signals:
-
+    void connectionStateChanged();
     
 public slots:
     void onConnected();
     void onDisconnected();
+    void onError();
     
 private:
     QTcpSocket socket;

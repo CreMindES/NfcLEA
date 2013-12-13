@@ -19,6 +19,7 @@ Q_DECL_EXPORT int main(int argc, char *argv[])
     QDeclarativeContext *context = viewer.rootContext();
     context->setContextProperty("nfcManager", nfcLeaApp.ndefManager);
     context->setContextProperty("appLogModel", &nfcLeaApp.appLogModel);
+    context->setContextProperty("client", nfcLeaApp.client);
 
     viewer.setOrientation(QmlApplicationViewer::ScreenOrientationLockPortrait);
     viewer.setMainQmlFile(QLatin1String("qml/nfclea/main.qml"));

@@ -42,7 +42,6 @@ Page {
         //onIsNfcAvailableChanged: console.log(isNfcAvailable);
         //onTagPresent: console.log("I'm happy")
 
-
     NotificationBar {
         id: notificationBar
         anchors.top: parent.top
@@ -110,7 +109,7 @@ Page {
             platformIconId: "toolbar-column"
             anchors.left: parent.left
             enabled: (myMenu.status === DialogStatus.Closed) ? true : false
-            onClicked: listPage.openFile("TestPage.qml")
+            onClicked: listPage.openFile("AppStatePage.qml")
         }
     }
 

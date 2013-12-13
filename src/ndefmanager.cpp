@@ -24,15 +24,20 @@ NdefManager::NdefManager(QObject *parent) :
     connect(nfcManager, SIGNAL(targetLost(QNearFieldTarget*)), this, SLOT(onTargetLost(QNearFieldTarget*)));
 
     // Checking NFC capabilities
-    isNfcAvailabe = true; // for qml
-    isNfcAvailabe = nfcManager->isAvailable();
-    if(isNfcAvailabe) {
+    if(isNfcAvailable()) {
         nfcManager->startTargetDetection();
         qDebug() << "NFC Manager: NFC is available.\nNFC tag dectection has started...\n";
     }
     else {
         qDebug() << "NFC Manager: NFC is not availabe!!!";
     }
+}
+
+bool NdefManager::isNfcAvailable()
+{
+    nfcAvailability = nfcManager->isAvailable();
+    qDebug() << "NFC availability reqeust: " << nfcAvailability;
+    return nfcAvailability;
 }
 
 void NdefManager::onTargetDetected2(QNearFieldTarget *target)

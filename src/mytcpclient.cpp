@@ -5,6 +5,7 @@ MyTcpClient::MyTcpClient(QObject *parent) :
 {
     connect(&socket, SIGNAL(connected()), this, SLOT(onConnected()));
     connect(&socket, SIGNAL(disconnected()), this, SLOT(onDisconnected()));
+    connect(&socket, SIGNAL(error(QAbstractSocket::SocketError)), this, SLOT(onError()));
 }
 
 MyTcpClient::~MyTcpClient()
@@ -51,20 +52,28 @@ bool MyTcpClient::connectTcpServer(QHostAddress hostAddress, quint16 port)
 
 void MyTcpClient::onConnected()
 {
+    emit connectionStateChanged();
     qDebug() << "Connected to: 192.168.2.105";
-    socket.write("Hello world", 12);
+    socket.write("nfcLea client connected\n", 26);
 }
 
 void MyTcpClient::onDisconnected()
 {
+    emit connectionStateChanged();
     qDebug() << "Server disconnected...";
+}
+
+void MyTcpClient::onError()
+{
+    qDebug() << socket.errorString();
 }
 
 void MyTcpClient::sendNfcUid(QString uid)
 {
     qDebug() << "Sending NFC UID...";
-    if(socket.isOpen()) {
+    if(socket.state() == QTcpSocket::ConnectedState) {
         if(socket.write(uid.toUtf8(), qstrlen(uid.toUtf8()))) {
+            //socket.close();
             qDebug() << "NFC UID sent to Server";
         }
         else {
@@ -78,4 +87,20 @@ void MyTcpClient::sendNfcUid(QString uid)
     else {
         qDebug() << "no connection to server\n";
     }
+}
+
+bool MyTcpClient::isClientConnected()
+{
+//    qDebug() << "Socket is open: " << socket.isOpen();
+//    qDebug() << "Socket is valid: " << socket.isValid();
+//    qDebug() << "Socket is writeable: " << socket.isWritable();
+    qDebug() << "Socket state: " << socket.state();
+    // TODO: support other states too
+    if (socket.state() == 3) return true;
+    else return false;
+}
+
+QString MyTcpClient::getHostAddress()
+{
+    return socketHostAddress.toString();
 }

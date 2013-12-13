@@ -24,10 +24,26 @@ Page {
             width: parent.width
             height: 150
 
+            /*
             NfcLogo {
                 id: appLogo
                 height: 100
                 width: 100
+
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.left: parent.left
+                anchors.leftMargin: 5
+            }
+            */
+
+            Image {
+                id: appLogo
+
+                source: "qrc:/images/appIcon.png"
+                height: 80
+                width: 80
+                sourceSize.height: appLogo.height
+                sourceSize.width: appLogo.width
 
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.left: parent.left
@@ -48,7 +64,7 @@ Page {
                 anchors.left: appLogo.right
                 anchors.leftMargin: 20
                 anchors.verticalCenter: appLogo.verticalCenter
-                anchors.verticalCenterOffset: -20
+                anchors.verticalCenterOffset: -15
             }
 
             Label {
@@ -57,7 +73,7 @@ Page {
                 height: 30
                 width: appName.width
 
-                text: "Version 0.2.0"
+                text: "Version 0.3.0"
 
                 color: "#000"
                 font.pixelSize: 20

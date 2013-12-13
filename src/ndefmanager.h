@@ -18,12 +18,18 @@ QTM_USE_NAMESPACE
 class NdefManager : public QObject
 {
     Q_OBJECT
+
+    //Q_PROPERTY(bool nfcAvailability READ isNfcAvailable)
+
 public:
     explicit NdefManager(QObject *parent = 0);
 
+    Q_INVOKABLE bool isNfcAvailable();
+
 private:
     QNearFieldManager *nfcManager;
-    bool isNfcAvailabe;
+
+    bool nfcAvailability;
     QString currentUID;
 
 signals:
