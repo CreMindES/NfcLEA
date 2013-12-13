@@ -24,7 +24,7 @@ Page {
         serverState.text = networkConnected ? "Connected" :
                                               "Not connected"
         serverState.color = networkConnected ? "#000" : "#a41f1f"
-        serverHost.text = "Host " + host
+        serverHost.text = networkConnected ? "Host: " + host : ""
         networkIcon.source = networkConnected ? "qrc:images/network.png" :
                                                 "qrc:images/networkGrey.png"
 
@@ -191,6 +191,7 @@ Page {
                     anchors.fill: parent
 
                     onClicked: {
+                        updateProperties()
                         updateServerStateView()
                     }
                 }
@@ -265,19 +266,62 @@ Page {
         anchors {
             horizontalCenter: parent.horizontalCenter
             top: scoreContainer.bottom
-            topMargin: 100
+            topMargin: 120
+        }
+    }
+
+    Button {
+        id: networkSettingsButton
+
+        text: qsTr("Network Settings")
+        visible: networkConnected ? false : true
+
+        onClicked: {
+            listPage.openFile("NetworkSettingsPage.qml")
+        }
+
+        anchors {
+            horizontalCenter: parent.horizontalCenter
+            top: connectButton.bottom
+            topMargin: 20
         }
     }
 
     ToolBarLayout {
         id: appStateTools
 
-        ToolIcon { iconId: "toolbar-back"; onClicked: { pageStack.pop(); } }
+        ToolIcon {
+            iconId: "toolbar-back"
+            onClicked: pageStack.pop()
+            enabled: (appStateMenu.status === DialogStatus.Closed) ? true : false
+        }
+        ToolIcon {
+            id: appStateToolbar
+            platformIconId: "toolbar-view-menu"
+            anchors.right: (parent === undefined) ? undefined : parent.right
+            onClicked: (appStateMenu.status === DialogStatus.Closed) ? appStateMenu.open() :
+                                                                       appStateMenu.close()
+            visible: networkConnected ? true : false
+        }
+    }
 
+    Menu {
+        id: appStateMenu
+        visualParent: appStatePage.parent
+        MenuLayout {
+            MenuItem {
+                id: menuDisconnect
+                text: qsTr("Disconnect")
+                onClicked: {
+                    client.disconnect()
+                }
+            }
+        }
     }
 
     Component.onCompleted: {
         updateProperties()
+        updateServerStateView()
     }
 
     Connections {

@@ -22,7 +22,7 @@ QML_IMPORT_PATH =
 # lines and add the respective components to the MOBILITY variable.
 CONFIG += mobility
 MOBILITY += connectivity
-QT += netwrok
+QT += network
 
 # Speed up launching on MeeGo/Harmattan when using applauncherd daemon
 CONFIG += qdeclarative-boostable
@@ -63,7 +63,8 @@ OTHER_FILES += \
     qml/nfclea/LogPage.qml \
     qml/nfclea/NotificationBar.qml \
     qml/nfclea/AboutPage.qml \
-    qml/nfclea/AppStatePage.qml
+    qml/nfclea/AppStatePage.qml \
+    qml/nfclea/NetworkSettingsPage.qml
 
 RESOURCES += \
     resources.qrc

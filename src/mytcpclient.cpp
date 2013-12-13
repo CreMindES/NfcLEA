@@ -17,8 +17,8 @@ bool MyTcpClient::connectToServer(QString address, quint16 port)
 {
     QHostAddress hostAddress(address);
     socketHostAddress = hostAddress;
-    socketPort = port;
-    if(connectTcpServer(socketHostAddress, socketPort))
+    socketPortNumber = port;
+    if(connectTcpServer(socketHostAddress, socketPortNumber))
         return true;
     else
         return false;
@@ -27,7 +27,7 @@ bool MyTcpClient::connectToServer(QString address, quint16 port)
 bool MyTcpClient::reConnectToServer()
 {
     qDebug() << "Reconnecting to server...";
-    if(connectTcpServer(socketHostAddress, socketPort)) {
+    if(connectTcpServer(socketHostAddress, socketPortNumber)) {
         qDebug() << "Reconnected.";
         return true;
     }
@@ -103,4 +103,14 @@ bool MyTcpClient::isClientConnected()
 QString MyTcpClient::getHostAddress()
 {
     return socketHostAddress.toString();
+}
+
+quint16 MyTcpClient::getPortNumber()
+{
+    return socketPortNumber;
+}
+
+void MyTcpClient::disconnect()
+{
+    socket.close();
 }
