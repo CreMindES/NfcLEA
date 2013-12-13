@@ -22,6 +22,7 @@ QML_IMPORT_PATH =
 # lines and add the respective components to the MOBILITY variable.
 CONFIG += mobility
 MOBILITY += connectivity
+QT += netwrok
 
 # Speed up launching on MeeGo/Harmattan when using applauncherd daemon
 CONFIG += qdeclarative-boostable
@@ -36,7 +37,8 @@ SOURCES += main.cpp \
     nfclogentry.cpp \
     rulelogentry.cpp \
     app.cpp \
-    applogmodel.cpp
+    applogmodel.cpp \
+    mytcpclient.cpp
 
 # Please do not modify the following two lines. Required for deployment.
 include(qmlapplicationviewer/qmlapplicationviewer.pri)
@@ -60,7 +62,8 @@ OTHER_FILES += \
     qml/nfclea/NfcLogo.qml \
     qml/nfclea/LogPage.qml \
     qml/nfclea/NotificationBar.qml \
-    qml/nfclea/AboutPage.qml
+    qml/nfclea/AboutPage.qml \
+    qml/nfclea/AppStatePage.qml
 
 RESOURCES += \
     resources.qrc
@@ -71,4 +74,5 @@ HEADERS += \
     nfclogentry.h \
     rulelogentry.h \
     app.h \
-    applogmodel.h
+    applogmodel.h \
+    mytcpclient.h

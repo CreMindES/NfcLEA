@@ -4,9 +4,9 @@
 #include <QObject>
 #include <QUrl>
 
-//#include "applogger.h"
 #include "applogmodel.h"
 #include "ndefmanager.h"
+#include "mytcpclient.h"
 
 class App : public QObject
 {
@@ -17,6 +17,7 @@ public:
     //AppLogger appLogger;
     AppLogModel appLogModel;
     NdefManager *ndefManager;
+    MyTcpClient *client;
     
 signals:
     
