@@ -58,7 +58,7 @@ Page {
 
                 text: "NfcLEA"
 
-                color: "#f8249ca4"
+                color: "#249ca4"
                 font.pixelSize: 40
 
                 anchors.left: appLogo.right
@@ -156,7 +156,7 @@ Page {
 
                 text: "Tamás G. Barna"
 
-                color: "#f8249ca4"
+                color: "#249ca4"
 
                 anchors.top: developerLabel.bottom
                 anchors.topMargin: 20

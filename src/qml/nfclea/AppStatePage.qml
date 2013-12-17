@@ -35,7 +35,7 @@ Page {
         id: appStatePageTitle
         text: qsTr("App State")
 
-        color: "#f8249ca4"
+        color: "#249ca4"
         font.pointSize: 35
 
         height: 80
@@ -216,7 +216,7 @@ Page {
 
             text: "Score"
 
-            color: "#f8249ca4"
+            color: "#249ca4"
             font.pointSize: 25
         }
 

@@ -41,7 +41,7 @@ Page {
         id: pageLabel
         text: "History"
 
-        color: "#f8249ca4"
+        color: "#249ca4"
 
         font.pointSize: 35
 

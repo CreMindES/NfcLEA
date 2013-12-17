@@ -19,7 +19,7 @@ Page {
         id: networkSettingsPageTitle
         text: qsTr("Network Settings")
 
-        color: "#f8249ca4"
+        color: "#249ca4"
         font.pointSize: 35
 
         height: 80
@@ -36,7 +36,7 @@ Page {
 
         text: qsTr("Server")
 
-        color: "#f8249ca4"
+        color: "#249ca4"
         font.pointSize: 25
 
         anchors.top: networkSettingsPageTitle.bottom
@@ -105,7 +105,7 @@ Page {
 
         text: "User"
 
-        color: "#f8249ca4"
+        color: "#249ca4"
         font.pointSize: 25
 
         anchors.top: networkSettingsContainer.bottom

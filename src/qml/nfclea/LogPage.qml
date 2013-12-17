@@ -16,7 +16,7 @@ Page {
             id: pageLabel
             text: qsTr("Notifications")
 
-            color: "#f8249ca4"
+            color: "#249ca4"
 
             font.pointSize: 35
 
@@ -151,7 +151,7 @@ Page {
 
     Menu {
         id: logMenu
-        visualParent: logPage
+        visualParent: logPage.parent
         MenuLayout {
             MenuItem {
                 text: qsTr("Clear history")

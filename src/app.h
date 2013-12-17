@@ -22,7 +22,7 @@ public:
 signals:
     
 public slots:
-    void onNfcTagUriRecordRead(QString Uid, QUrl url);
+    void onNfcTagUriRecordRead(QString uid, QUrl url);
     
 };
 
