@@ -74,6 +74,7 @@ void MyTcpClient::sendNfcUid(QString uid)
     if(socket.state() == QTcpSocket::ConnectedState) {
         if(socket.write(uid.toUtf8(), qstrlen(uid.toUtf8()))) {
             //socket.close();
+            socket.write(QByteArray("\n"), 1);
             qDebug() << "NFC UID sent to Server";
         }
         else {
@@ -105,9 +106,19 @@ QString MyTcpClient::getHostAddress()
     return socketHostAddress.toString();
 }
 
+void MyTcpClient::setHostAddress(QString newHostAddress)
+{
+    socketHostAddress = QHostAddress(newHostAddress);
+}
+
 quint16 MyTcpClient::getPortNumber()
 {
     return socketPortNumber;
+}
+
+void MyTcpClient::setPortNumber(quint16 newPortNumber)
+{
+    socketPortNumber = newPortNumber;
 }
 
 void MyTcpClient::disconnect()

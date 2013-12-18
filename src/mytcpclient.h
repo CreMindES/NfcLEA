@@ -19,7 +19,9 @@ public:
     void sendNfcUid(QString uid);
     Q_INVOKABLE bool isClientConnected();
     Q_INVOKABLE QString getHostAddress();
+    void setHostAddress(QString newHostAddress);
     Q_INVOKABLE quint16 getPortNumber();
+    void setPortNumber(quint16 newPortNumber);
     Q_INVOKABLE void disconnect();
     
 signals:
